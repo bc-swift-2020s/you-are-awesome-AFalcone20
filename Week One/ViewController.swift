@@ -12,8 +12,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
-    var imageNumber = 0
-    var messageNumber = 0
+    var imageNumber = -1
+    var messageNumber = -1
     let totalNumberOfImages = 9
            
     override func viewDidLoad() {
@@ -28,35 +28,25 @@ class ViewController: UIViewController {
                         "When the Genius bar needs help, They Call You!",
                         "You've got the Design Skills of Jony Ive",
                         "Fabulous? That's You!"]
-        messageLabel.text = messages[Int.random(in: 0...messages.count-1)]
-        imageView.image = UIImage(named: "image\(Int.random(in: 0...totalNumberOfImages))")
         
-//        messageLabel.text = messages[messageNumber]
-//        messageNumber += 1
-//        if messageNumber == messages.count{
-//            messageNumber = 0
-//        }
+        var newMessageNumber: Int
         
-//        let imageName = "image\(imageNumber))"
-//        imageView.image = UIImage(named: imageName)
-//       imageNumber = imageNumber + 1
-//       if imageNumber == 10{
-//         imageNumber = 0
-//        }
+        repeat {
+            newMessageNumber = Int.random(in: 0...messages.count-1)
+        } while messageNumber == newMessageNumber
+        messageNumber = newMessageNumber
+        messageLabel.text = messages[messageNumber]
         
+        var newImageNumber: Int
         
+        repeat {
+            newImageNumber = Int.random(in: 0...totalNumberOfImages)
+        } while imageNumber == newImageNumber
+       
+        imageNumber = newImageNumber
+        imageView.image = UIImage(named: "image\(imageNumber)")
         
-        //       let message1 = "You Are Awesome!"
-        //       let message2 = "You Are Great!"
-        //       let message3 = "You Are Amazing!"
-        //
-        //        if messageLabel.text == message1 {
-        //            messageLabel.text = message2
-        //        } else if messageLabel.text == message2 {
-        //            messageLabel.text = message3
-        //        } else {
-        //            messageLabel.text = message1
-        //        }
+
     }
     
    
