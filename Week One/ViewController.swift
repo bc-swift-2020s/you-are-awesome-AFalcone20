@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
@@ -15,12 +16,14 @@ class ViewController: UIViewController {
     var imageNumber = -1
     var messageNumber = -1
     let totalNumberOfImages = 9
+    var audioPlayer = AVAudioPlayer()
            
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
+    
+    
     @IBAction func sayItPressed(_ sender: UIButton) {
         var messages = ["You Are Awesome!",
                         "You Are Great",
@@ -42,11 +45,20 @@ class ViewController: UIViewController {
         repeat {
             newImageNumber = Int.random(in: 0...totalNumberOfImages)
         } while imageNumber == newImageNumber
-       
+        
         imageNumber = newImageNumber
         imageView.image = UIImage(named: "image\(imageNumber)")
         
-
+        if let sound = NSDataAsset(name: "Sound 0"){
+            do {
+                try audioPlayer = AVAudioPlayer(data: sound.data)
+                audioPlayer.play()
+            } catch {
+                print("Error: \(error.localizedDescription) could not intialize" )
+            }
+        }else {
+            print("Error: Could not read data")
+        }
     }
     
    
